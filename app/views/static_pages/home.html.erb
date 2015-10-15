@@ -17,18 +17,102 @@
     </div>
   </div>
 <% else %>
-  <div class="center hero-unit">
-    <h1>Welcome to the Sample App</h1>
+  <div id="dropper" class="center hero-unit">
+    <h1>Extract data from pictures</h1>
+    <h2>Open a picture or drop it here.</h2>
 
-    <h2>
-      This is the home page for the
-      <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
-      sample application.
-    </h2>
+<input type="file" id="src" style="display:none;" onChange="showImage(this);"/>
+<img id="target"/>
+<input type="button" class="btn btn-large btn-primary" value = "Open picture" onclick="getfile();"/>
+<input type="button" class="btn btn-large btn-primary" value = "Edit datas" style="display:none" onclick="changeDatas();"/>
 
-    <%= link_to "Sign up now!", signup_path,
-                                class: "btn btn-large btn-primary" %>
+<script type="text/javascript">
+    function getfile(){
+        document.getElementById('src').click();
+    }
+</script>
+	<h4><font color="grey">Learn more about 
+      <a href="http://railstutorial.org/">picture metadata</a>
+      and
+	<a href="http://railstutorial.org/">EXIF files</a>.
+	</font></h4>
   </div>
 
-  <%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
+<div class="row">
+<aside class="span4">
+<fieldset>
+<legend>General Informations</legend>
+	Dimension:<br>
+  	<input type="text" name="firstname">
+  	<br>
+  	Original date:<br>
+  	<input type="text" name="lastname">
+	<br>
+  	Model:<br>
+  	<input type="text" name="lastname">
+	<br>
+  	Last changes:<br>
+  	<input type="text" name="lastname">
+  	<br><br>
+</fieldset>
+</aside>
+<aside class="span4">
+<fieldset>
+<legend>Geolocalisation</legend>
+	GPS Latitude:<br>
+  	<input type="text" name="firstname">
+  	<br>
+  	GPS Longitude:<br>
+  	<input type="text" name="lastname">
+	<br>
+  	GPS Altitude:<br>
+  	<input type="text" name="lastname">
+	<br>
+  	Address:<br>
+  	<input type="text" name="lastname">
+	<br><br>
+</fieldset>
+</aside>
+<aside class="span4">
+<fieldset>
+<legend>Technical Informations</legend>
+	Exposition Time (s):<br>
+  	<input type="text" name="firstname">
+  	<br>
+  	Focal Length (mm):<br>
+  	<input type="text" name="lastname">
+	<br>
+  	ISO Speed Rate:<br>
+  	<input type="text" name="lastname">
+	<br>
+  	Compression Rate:<br>
+  	<input type="text" name="lastname">
+  	<br><br>
+</fieldset>
+</aside>
+</div>
 <% end %>
+
+
+ <script>
+function showImage(src,target) {
+  var fr=new FileReader();
+  fr.onload = function(e) { target.src = this.result; };
+  src.addEventListener("change",function() {  
+    fr.readAsDataURL(src.files[0]);
+  });
+}
+
+
+
+
+function fillFields(target){
+	alert(target.name);
+}
+
+var src = document.getElementById("src");
+var target = document.getElementById("target");
+showImage(src,target);
+  </script>
+
+
