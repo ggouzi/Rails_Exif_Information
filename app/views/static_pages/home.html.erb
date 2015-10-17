@@ -1,58 +1,65 @@
-<% if signed_in? %>
-  <div class="row">
-    <aside class="span4">
-      <section>
-        <%= render 'shared/user_info' %>
-      </section>
-      <section>
-        <%= render 'shared/stats' %>
-      </section>
-      <section>
-        <%= render 'shared/micropost_form' %>
-      </section>
-    </aside>
-    <div class="span8">
-      <h3>Micropost Feed</h3>
-      <%= render 'shared/feed' %>
-    </div>
-  </div>
-<% else %>
   <div id="dropper" class="center hero-unit">
     <h1>Extract data from pictures</h1>
     <h2>Open a picture or drop it here.</h2>
 
 <input type="file" id="src" style="display:none;" onChange="showImage(this);"/>
-<img id="target"/>
+<img id="target" exif="true"/>
 <input type="button" class="btn btn-large btn-primary" value = "Open picture" onclick="getfile();"/>
 <input type="button" class="btn btn-large btn-primary" value = "Edit datas" style="display:none" onclick="changeDatas();"/>
 
 <script type="text/javascript">
     function getfile(){
         document.getElementById('src').click();
+		<% require 'exifr' %>
+		<% require 'geocoder' %>
+		// Comment récupèrer le chemin de l'image (en js) et la passer en paramètre de la fonction new (en ruby) ?
+		/*<% exif = EXIFR::JPEG.new("/home/gaetan/Documents/Programmation/JAVA/working linux 64 bits/Extract_exif/IMAG0057.jpg")  %>
+		document.getElementById('dimension').value="<%= exif.height%>"+"x"+"<%= exif.width%>";
+		document.getElementById('originalDate').value="<%= exif.date_time_original%>";
+		document.getElementById('model').value="<%= exif.make%>"+"-"+"<%= exif.model%>";
+		document.getElementById('lastChanges').value="<%= exif.date_time%>";
+
+		document.getElementById('latitude').value="<%= exif.gps_latitude_ref%>"+"-"+"<%= exif.gps_latitude%>";
+		document.getElementById('longitude').value="<%= exif.gps_longitude_ref%>"+"-"+"<%= exif.gps_longitude%>";
+		document.getElementById('altitude').value="<%= exif.gps_altitude%>";
+
+		document.getElementById('expositionTime').value="<%= exif.exposure_time.to_s%>";
+		document.getElementById('focalLength').value="<%= exif.focal_length.to_i%>";
+		document.getElementById('ISO').value="<%= exif.iso_speed_ratings%>";
+		document.getElementById('compressionRate').value="<%= exif.compressed_bits_per_pixel%>";
+
+		<%=
+		query = dps_to_dd(exif.gps_latitude, exif.gps_latitude_ref, exif.gps_longitude, exif.gps_longitude_ref)
+		result = Geocoder.search(query).first
+		%>
+		document.getElementById('address').value="<%=result%>";*/
+
     }
 </script>
-	<h4><font color="grey">Learn more about 
-      <a href="http://railstutorial.org/">picture metadata</a>
-      and
-	<a href="http://railstutorial.org/">EXIF files</a>.
-	</font></h4>
-  </div>
+
+<h4><font color="grey">Learn more about 
+  		<a href="http://railstutorial.org/">picture metadata</a>and
+		<a href="http://railstutorial.org/">EXIF files</a>.
+    </font>
+</h4>
+</div>
 
 <div class="row">
 <aside class="span4">
+
 <fieldset>
 <legend>General Informations</legend>
 	Dimension:<br>
-  	<input type="text" name="firstname">
+  	<input type="text" id="dimension">
   	<br>
   	Original date:<br>
-  	<input type="text" name="lastname">
+  	<input type="text" id="originalDate">
 	<br>
   	Model:<br>
-  	<input type="text" name="lastname">
+  	<input type="text" id="model">
 	<br>
   	Last changes:<br>
-  	<input type="text" name="lastname">
+  	<input type="text" id="lastChanges">
   	<br><br>
 </fieldset>
 </aside>
@@ -60,16 +67,16 @@
 <fieldset>
 <legend>Geolocalisation</legend>
 	GPS Latitude:<br>
-  	<input type="text" name="firstname">
+  	<input type="text" id="latitude">
   	<br>
   	GPS Longitude:<br>
-  	<input type="text" name="lastname">
+  	<input type="text" id="longitude">
 	<br>
   	GPS Altitude:<br>
-  	<input type="text" name="lastname">
+  	<input type="text" id="altitude">
 	<br>
   	Address:<br>
-  	<input type="text" name="lastname">
+  	<input type="text" id="address">
 	<br><br>
 </fieldset>
 </aside>
@@ -77,21 +84,20 @@
 <fieldset>
 <legend>Technical Informations</legend>
 	Exposition Time (s):<br>
-  	<input type="text" name="firstname">
+  	<input type="text" id="expositionTime">
   	<br>
   	Focal Length (mm):<br>
-  	<input type="text" name="lastname">
+  	<input type="text" id="focalLength">
 	<br>
   	ISO Speed Rate:<br>
-  	<input type="text" name="lastname">
+  	<input type="text" id="ISO">
 	<br>
   	Compression Rate:<br>
-  	<input type="text" name="lastname">
+  	<input type="text" id="compressionRate">
   	<br><br>
 </fieldset>
 </aside>
 </div>
-<% end %>
 
 
  <script>
@@ -101,13 +107,7 @@ function showImage(src,target) {
   src.addEventListener("change",function() {  
     fr.readAsDataURL(src.files[0]);
   });
-}
 
-
-
-
-function fillFields(target){
-	alert(target.name);
 }
 
 var src = document.getElementById("src");
