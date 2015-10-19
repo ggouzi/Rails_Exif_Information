@@ -1,0 +1,71 @@
+
+<div class="col-xs-3">
+  <%= link_to image_tag(@image.image.thumb('180x180#').url, alt: @image.title, class: 'img-thumbnail'),
+              @image.image.url , target: '_blank' %>
+  <p><%= @image.title %></p>
+</div>
+
+<div class="container">
+<div class="row">
+<aside class="span4">
+
+<fieldset>
+<legend>General Informations</legend>
+  Dimension:<br>
+    <input type="text" id="dimension">
+    <br>
+    Original date:<br>
+    <input type="text" id="originalDate">
+  <br>
+    Model:<br>
+    <input type="text" id="model">
+  <br>
+    Last changes:<br>
+    <input type="text" id="lastChanges">
+    <br><br>
+</fieldset>
+</aside>
+<aside class="span4">
+<fieldset>
+<legend>Geolocalisation</legend>
+  GPS Latitude:<br>
+    <input type="text" id="latitude">
+    <br>
+    GPS Longitude:<br>
+    <input type="text" id="longitude">
+  <br>
+    GPS Altitude:<br>
+    <input type="text" id="altitude">
+  <br>
+    Address:<br>
+    <input type="text" id="address">
+  <br><br>
+</fieldset>
+</aside>
+<aside class="span4">
+<fieldset>
+<legend>Technical Informations</legend>
+  Exposition Time (s):<br>
+    <input type="text" id="expositionTime">
+    <br>
+    Focal Length (mm):<br>
+    <input type="text" id="focalLength">
+  <br>
+    ISO Speed Rate:<br>
+    <input type="text" id="ISO">
+  <br>
+    Compression Rate:<br>
+    <input type="text" id="compressionRate">
+    <br><br>
+</fieldset>
+</aside>
+<div class="col-xs-3">
+  <input type="button" class="btn btn-large btn-primary" value = "Download with new exif data"  />
+</div
+</div>
+</div>
+
+
+
+
+

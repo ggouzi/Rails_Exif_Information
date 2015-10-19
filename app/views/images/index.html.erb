@@ -1,0 +1,7 @@
+  <% @images.each do |img| %>
+    <li class="col-xs-3">
+      <%= link_to image_tag(img.image.thumb('180x180#').url, alt: img.title, class: 'img-thumbnail'),
+                  img.image.url, target: '_blank' %>
+      <p><%= img.title %></p>
+    </li>
+  <% end %>

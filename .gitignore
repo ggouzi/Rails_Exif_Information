@@ -19,4 +19,4 @@ doc/
 .idea
 .rvmrc
 .ruby-*
-.secret
+.secretpublic/system

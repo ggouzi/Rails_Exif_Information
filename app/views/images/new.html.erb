@@ -1,0 +1,20 @@
+  <div id="dropper" class="center hero-unit">
+    <h1>Extract data from pictures</h1>
+    <h2>Open a picture or drop it here.</h2>
+
+<!-- <input type="file" id="src" style="display:none;" onChange="showImage(this);"/>
+<img id="target" exif="true"/>
+<input type="button" class="btn btn-large btn-primary" value = "Open picture" onclick="getfile();"/>
+<input type="button" class="btn btn-large btn-primary" value = "Edit datas" style="display:none" onclick="changeDatas();"/> -->
+
+<%= simple_form_for @image do |img| %>
+  <%= img.file_field :image, required: true, hint: 'In order to analyse the exif data and change them please submit the corresponding image'  %>
+  <%= img.button :submit, class:"btn btn-large btn-primary" %>
+<% end %>
+
+
+<h4><font color="grey">Learn more about
+    <a href="https://en.wikipedia.org/wiki/Exchangeable_image_file_format">EXIF files</a>.
+    </font>
+</h4>
+</div>

@@ -7,13 +7,18 @@
 <input type="button" class="btn btn-large btn-primary" value = "Open picture" onclick="getfile();"/>
 <input type="button" class="btn btn-large btn-primary" value = "Edit datas" style="display:none" onclick="changeDatas();"/>
 
+<%= simple_form_for (@image, remote: true) do |IMG| %>
+  <%= IMG.input :username, type: :file,label_html: { id: 'src' }  %>
+  <%= IMG.button :submit, remote: true %>
+<% end %>
+
 <script type="text/javascript">
     function getfile(){
         document.getElementById('src').click();
 		<% require 'exifr' %>
 		<% require 'geocoder' %>
 		// Comment récupèrer le chemin de l'image (en js) et la passer en paramètre de la fonction new (en ruby) ?
-		/*<% exif = EXIFR::JPEG.new("/home/gaetan/Documents/Programmation/JAVA/working linux 64 bits/Extract_exif/IMAG0057.jpg")  %>
+		/*<% exif = EXIFR::JPEG.new("/Users/robinroyer/Documents/developpement/depot-git/HelloRuby/ruby_extract_exif/test8.jpg")%>
 		document.getElementById('dimension').value="<%= exif.height%>"+"x"+"<%= exif.width%>";
 		document.getElementById('originalDate').value="<%= exif.date_time_original%>";
 		document.getElementById('model').value="<%= exif.make%>"+"-"+"<%= exif.model%>";
@@ -37,7 +42,7 @@
     }
 </script>
 
-<h4><font color="grey">Learn more about 
+<h4><font color="grey">Learn more about
 		<a href="https://en.wikipedia.org/wiki/Exchangeable_image_file_format">EXIF files</a>.
     </font>
 </h4>
@@ -103,7 +108,7 @@
 function showImage(src,target) {
   var fr=new FileReader();
   fr.onload = function(e) { target.src = this.result; };
-  src.addEventListener("change",function() {  
+  src.addEventListener("change",function() {
     fr.readAsDataURL(src.files[0]);
   });
 
