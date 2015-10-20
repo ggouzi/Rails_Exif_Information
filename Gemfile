@@ -15,6 +15,7 @@ gem 'chunky_png'
 gem 'simple_form'
 gem 'dragonfly'
 gem 'protected_attributes'
+gem 'byebug'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'

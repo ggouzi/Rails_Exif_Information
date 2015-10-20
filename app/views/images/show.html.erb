@@ -12,16 +12,16 @@
 <fieldset>
 <legend>General Informations</legend>
   Dimension:<br>
-    <input type="text" id="dimension">
+    <input type="text" value="<%= "#{@exif.width}  x  #{@exif.height}" %>" id="dimension">
     <br>
     Original date:<br>
-    <input type="text" id="originalDate">
+    <input type="text" value="<%= @exif.date_time_original %>" id="originalDate">
   <br>
     Model:<br>
-    <input type="text" id="model">
+    <input type="text" value="<%= @exif.model %>" id="model">
   <br>
     Last changes:<br>
-    <input type="text" id="lastChanges">
+    <input type="text" value="<%= @exif.date_time %>" id="lastChanges">
     <br><br>
 </fieldset>
 </aside>
@@ -29,16 +29,16 @@
 <fieldset>
 <legend>Geolocalisation</legend>
   GPS Latitude:<br>
-    <input type="text" id="latitude">
+    <input type="text" value="<%= @exif.gps_latitude %>" id="latitude">
     <br>
     GPS Longitude:<br>
-    <input type="text" id="longitude">
+    <input type="text" value="<%= @exif.gps_longitude %>" id="longitude">
   <br>
     GPS Altitude:<br>
-    <input type="text" id="altitude">
+    <input type="text" value="<%= @exif.gps_altitude %>" id="altitude">
   <br>
     Address:<br>
-    <input type="text" id="address">
+    <input type="text" value="<%= @address.data["formatted_address"] if ! @address.blank? %>" id="address">
   <br><br>
 </fieldset>
 </aside>
@@ -46,16 +46,16 @@
 <fieldset>
 <legend>Technical Informations</legend>
   Exposition Time (s):<br>
-    <input type="text" id="expositionTime">
+    <input type="text" value="<%= @exif.exposure_time.to_s %>" id="expositionTime">
     <br>
     Focal Length (mm):<br>
-    <input type="text" id="focalLength">
+    <input type="text" value="<%= @exif.focal_length.to_i %>" id="focalLength">
   <br>
     ISO Speed Rate:<br>
-    <input type="text" id="ISO">
+    <input type="text" value="<%= @exif.iso_speed_ratings %>" id="ISO">
   <br>
     Compression Rate:<br>
-    <input type="text" id="compressionRate">
+    <input type="text" value="<%= @exif.compressed_bits_per_pixel %>" id="compressionRate">
     <br><br>
 </fieldset>
 </aside>
