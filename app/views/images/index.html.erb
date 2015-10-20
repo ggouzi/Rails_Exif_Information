@@ -1,7 +1,18 @@
-  <% @images.each do |img| %>
-    <li class="col-xs-3">
-      <%= link_to image_tag(img.image.thumb('180x180#').url, alt: img.title, class: 'img-thumbnail'),
-                  img.image.url, target: '_blank' %>
-      <p><%= img.title %></p>
-    </li>
+<h3>Your image list</h3> 
+
+<% @images.each do |img| %>
+    <div class="col-xs-4">
+  	<ul> <%= link_to image_tag(img.image.thumb('180x180#').url, 
+		alt: img.title, class: 'img-thumbnail'),
+             	img.image.url , target: '_blank' %>
+
+		Display some informations such as size : <%= (img.image.size/1024).round(2)%> Ko and ...
+
+		<li>
+		<%= img.image.name %>
+		</li>
+	</ul>
+      	
+    </div>
+
   <% end %>

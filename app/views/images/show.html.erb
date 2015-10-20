@@ -2,7 +2,7 @@
 <div class="col-xs-3">
   <%= link_to image_tag(@image.image.thumb('180x180#').url, alt: @image.title, class: 'img-thumbnail'),
               @image.image.url , target: '_blank' %>
-  <p><%= @image.title %></p>
+  <p><%= @image.image.name%></p>
 </div>
 
 <div class="container">
@@ -12,16 +12,16 @@
 <fieldset>
 <legend>General Informations</legend>
   Dimension:<br>
-    <input type="text" value="<%= "#{@exif.width}  x  #{@exif.height}" %>" id="dimension">
+    <input type="text" value="<%= "#{@exif.width}  x  #{@exif.height}" %>" id="dimension" title="Current dimension of the picture in pixels (width x height">
     <br>
     Original date:<br>
-    <input type="text" value="<%= @exif.date_time_original %>" id="originalDate">
+    <input type="text" value="<%= @exif.date_time_original.strftime('%d/%m/%Y - %H:%M') if @exif.date_time_original%>" id="originalDate" title="Original date when the picture was taken">
   <br>
     Model:<br>
-    <input type="text" value="<%= @exif.model %>" id="model">
+    <input type="text" value="<%= @exif.model %>" id="model" title="Brand an Model of the camera">
   <br>
     Last changes:<br>
-    <input type="text" value="<%= @exif.date_time %>" id="lastChanges">
+    <input type="text" value="<%= @exif.date_time.strftime('%d/%m/%Y - %H:%M') if @exif.date_time %>" id="lastChanges" title="Date when the picture was edited on the last time">
     <br><br>
 </fieldset>
 </aside>
@@ -29,16 +29,16 @@
 <fieldset>
 <legend>Geolocalisation</legend>
   GPS Latitude:<br>
-    <input type="text" value="<%= @exif.gps_latitude %>" id="latitude">
+    <input type="text" id="latitude" title="GPS Latitude (horizontal=relative to the equator) where the photo was taken : degree°minute'second"">
     <br>
     GPS Longitude:<br>
-    <input type="text" value="<%= @exif.gps_longitude %>" id="longitude">
+    <input type="text" id="longitude" title="GPS Longitude (vertical=relative to the meridian) where the photo was taken : degree°minute'second"">
   <br>
     GPS Altitude:<br>
-    <input type="text" value="<%= @exif.gps_altitude %>" id="altitude">
+    <input type="text" id="altitude" title="GPS Altitude where the photo was taken">
   <br>
     Address:<br>
-    <input type="text" value="<%= @address.data["formatted_address"] if ! @address.blank? %>" id="address">
+    <input type="text" value="<%= @address.data["formatted_address"] if ! @address.blank? %>" id="address" title="Address where the photo was taken : This information isn't included into EXIF file, it is automatically calculated with GPS coordonates">
   <br><br>
 </fieldset>
 </aside>
@@ -46,16 +46,16 @@
 <fieldset>
 <legend>Technical Informations</legend>
   Exposition Time (s):<br>
-    <input type="text" value="<%= @exif.exposure_time.to_s %>" id="expositionTime">
+    <input type="text" id="expositionTime" title="Duration of exposure to the light (in second)">
     <br>
     Focal Length (mm):<br>
-    <input type="text" value="<%= @exif.focal_length.to_i %>" id="focalLength">
+    <input type="text" value="<%= @exif.focal_length.to_i %>" id="focalLength" title="Focal length of the camera which take the photo (in millimeters)">
   <br>
     ISO Speed Rate:<br>
-    <input type="text" value="<%= @exif.iso_speed_ratings %>" id="ISO">
+    <input type="text" value="<%= @exif.iso_speed_ratings %>" id="ISO" title="ISO Speed Rating">
   <br>
-    Compression Rate:<br>
-    <input type="text" value="<%= @exif.compressed_bits_per_pixel %>" id="compressionRate">
+    Compression Rate (bits/pixel):<br>
+    <input type="text" id="compressionRate" title="Compression rate of the picture (due to format). It represents the number of bits per pixel">
     <br><br>
 </fieldset>
 </aside>
@@ -67,5 +67,23 @@
 
 
 
+<script type="text/javascript">
+	var compressedRate = parseFloat(eval("<%= @exif.compressed_bits_per_pixel %>")).toFixed(2);
+	var exposure = parseFloat(eval("<%= @exif.exposure_time.to_s %>")).toFixed(2);
 
+	var lat0 = eval("<%= @exif.gps_latitude[0] if @exif.gps_latitude %>");
+	var lat1 = eval("<%= @exif.gps_latitude[1] if @exif.gps_latitude %>");
+	var lat2 = parseFloat(eval("<%= @exif.gps_latitude[2] if @exif.gps_latitude %>")).toFixed(3);
 
+	var lon0 = eval("<%= @exif.gps_longitude[0] if @exif.gps_longitude %>");
+	var lon1 = eval("<%= @exif.gps_longitude[1] if @exif.gps_longitude %>");
+	var lon2 = parseFloat(eval("<%= @exif.gps_longitude[2] if @exif.gps_longitude %>")).toFixed(3);
+
+	var alt = parseFloat(eval("<%= @exif.gps_altitude if @exif.gps_altitude %>")).toFixed(1);
+
+	document.getElementById('compressionRate').value = compressedRate;
+	document.getElementById('expositionTime').value = exposure;
+	document.getElementById('latitude').value = lat0+"°"+lat1+"'"+lat2+"\"";
+	document.getElementById('longitude').value = lon0+"°"+lon1+"'"+lon2+"\"";
+	document.getElementById('altitude').value = alt;
+</script>
