@@ -1,10 +1,10 @@
 <h3>Your image list</h3> 
 
-<% @images.each do |img| %>
+<% @images.each_with_index do |img, index| %>
     <div class="col-xs-4">
   	<ul> <%= link_to image_tag(img.image.thumb('180x180#').url, 
 		alt: img.title, class: 'img-thumbnail'),
-             	img.image.url , target: '_blank' %>
+             	"images/#{index+1}" %>
 
 		Display some informations such as size : <%= (img.image.size/1024).round(2)%> Ko and ...
 

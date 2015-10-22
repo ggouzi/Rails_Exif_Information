@@ -15,30 +15,6 @@
 <script type="text/javascript">
     function getfile(){
         document.getElementById('src').click();
-		<% require 'exifr' %>
-		<% require 'geocoder' %>
-		// Comment récupèrer le chemin de l'image (en js) et la passer en paramètre de la fonction new (en ruby) ?
-		/*<% exif = EXIFR::JPEG.new("/Users/robinroyer/Documents/developpement/depot-git/HelloRuby/ruby_extract_exif/test8.jpg")%>
-		document.getElementById('dimension').value="<%= exif.height%>"+"x"+"<%= exif.width%>";
-		document.getElementById('originalDate').value="<%= exif.date_time_original%>";
-		document.getElementById('model').value="<%= exif.make%>"+"-"+"<%= exif.model%>";
-		document.getElementById('lastChanges').value="<%= exif.date_time%>";
-
-		document.getElementById('latitude').value="<%= exif.gps_latitude_ref%>"+"-"+"<%= exif.gps_latitude%>";
-		document.getElementById('longitude').value="<%= exif.gps_longitude_ref%>"+"-"+"<%= exif.gps_longitude%>";
-		document.getElementById('altitude').value="<%= exif.gps_altitude%>";
-
-		document.getElementById('expositionTime').value="<%= exif.exposure_time.to_s%>";
-		document.getElementById('focalLength').value="<%= exif.focal_length.to_i%>";
-		document.getElementById('ISO').value="<%= exif.iso_speed_ratings%>";
-		document.getElementById('compressionRate').value="<%= exif.compressed_bits_per_pixel%>";
-
-		<%=
-		query = dps_to_dd(exif.gps_latitude, exif.gps_latitude_ref, exif.gps_longitude, exif.gps_longitude_ref)
-		result = Geocoder.search(query).first
-		%>
-		document.getElementById('address').value="<%=result%>";*/
-
     }
 </script>
 

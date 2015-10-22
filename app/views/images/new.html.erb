@@ -2,19 +2,21 @@
     <h1>Extract data from pictures</h1>
     <h2>Open a picture or drop it here.</h2>
 
-<!-- <input type="file" id="src" style="display:none;" onChange="showImage(this);"/>
-<img id="target" exif="true"/>
-<input type="button" class="btn btn-large btn-primary" value = "Open picture" onclick="getfile();"/>
-<input type="button" class="btn btn-large btn-primary" value = "Edit datas" style="display:none" onclick="changeDatas();"/> -->
-
 <%= simple_form_for @image do |img| %>
-  <%= img.file_field :image, required: true, hint: 'In order to analyse the exif data and change them please submit the corresponding image'  %>
-  <%= img.button :submit, class:"btn btn-large btn-primary" %>
+  <%= img.file_field :image, required: true, accept: 'image/png,image/gif,image/jpeg', hint: 'In order to analyse the exif data and change them please submit the corresponding image', class: "btn btn-primary", onchange: "displayButton()" %>
+ <%= button_tag(type: 'submit', class: "btn-large btn-success", style:"display:none", id:"createPicture") do %>
+    <i class="icon-plus icon-white"></i> Create picture
+  <% end %>
 <% end %>
-
 
 <h4><font color="grey">Learn more about
     <a href="https://en.wikipedia.org/wiki/Exchangeable_image_file_format">EXIF files</a>.
     </font>
 </h4>
 </div>
+
+<script type="text/javascript">
+    function displayButton(){
+        document.getElementById('createPicture').style = "display:show";
+    }
+</script>

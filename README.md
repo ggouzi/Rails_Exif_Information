@@ -1,6 +1,7 @@
 # Rails_Exif_Information
 
-TODO : Get image and pass it into exif object (app/views/static_pages::16).
+TODO : Reset database on each pull. Some datas are stored on the database and can't be reloaded because pathname of the pictures are different on each computer.
+	bundle exec rake db:reset
 
 This application allow you to extract exif informations from your local pictures such as : Date, Model, GPS Location (and find address), technical informations (focal length, exposure time, ISO spped rating)...
 
