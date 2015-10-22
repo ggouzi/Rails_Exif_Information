@@ -1,18 +1,27 @@
-<h3>Your image list</h3> 
+<h3>Your image list</h3>
 
 <% @images.each_with_index do |img, index| %>
-    <div class="col-xs-4">
-  	<ul> <%= link_to image_tag(img.image.thumb('180x180#').url, 
-		alt: img.title, class: 'img-thumbnail'),
-             	"images/#{index+1}" %>
+  <div class="row">
+		<aside class="span3">
+			<li>
+  	 		<%= link_to image_tag(img.image.thumb('180x180#').url, 
+				alt: img.title, class: 'img-thumbnail'),
+        img.image.url , target: '_blank' %>
 
-		Display some informations such as size : <%= (img.image.size/1024).round(2)%> Ko and ...
+				
 
-		<li>
-		<%= img.image.name %>
-		</li>
-	</ul>
-      	
-    </div>
+				<a class="btn btn-large btn-info" href="images/<%= index+1 %>">Exif informations</a>
+				<br>
+				<br>
+				<br>
+			</li>
+		</aside>
+		<aside class="span9">
+			<h5>Title </h5><%= (img.image.name) %><br><br>
+			<h5>Size </h5><%= (img.image.size/1024).round(2 )%> Ko<br>
+		</aside>
 
-  <% end %>
+
+
+	</div>
+<% end %>
