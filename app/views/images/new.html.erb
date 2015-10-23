@@ -2,12 +2,20 @@
     <h1>Extract data from pictures</h1>
     <h2>Open a picture or drop it here.</h2>
 
+<button class="btn btn-large btn-primary" id="openPicture" style="display:show" onclick="openDialog();">
+     <i class="icon-search icon-white"></i> Open picture</button>
+<br>
 <%= simple_form_for @image do |img| %>
-  <%= img.file_field :image, required: true, accept: 'image/png,image/gif,image/jpeg', hint: 'In order to analyse the exif data and change them please submit the corresponding image', class: "btn btn-primary", onchange: "displayButton()" %>
+
+  <%= img.file_field :image, required: true, accept: 'image/png,image/jpeg', hint: 'In order to analyse the exif data and change them please submit the corresponding image', class: "btn btn-primary", id:"dialog", style:"display:none" %>
+
  <%= button_tag(type: 'submit', class: "btn-large btn-success", style:"display:none", id:"createPicture") do %>
     <i class="icon-plus icon-white"></i> Create picture
   <% end %>
+
 <% end %>
+
+<img id="currentImage" style="display:none" IMG HEIGHT=180 WIDTH=180 src="#" />
 
 <h4><font color="grey">Learn more about
     <a href="https://en.wikipedia.org/wiki/Exchangeable_image_file_format">EXIF files</a>.
@@ -16,7 +24,25 @@
 </div>
 
 <script type="text/javascript">
-    function displayButton(){
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+		    var reader = new FileReader();
+		    reader.onload = function (e) {
+		        $('#currentImage').attr('src', e.target.result);
+		    }
+		    reader.readAsDataURL(input.files[0]);
+		}
+	}
+
+	$("#dialog").change(function(){
+		readURL(this);
+	});
+    function openDialog(){
+        document.getElementById('dialog').click();
         document.getElementById('createPicture').style = "display:show";
+        document.getElementById('currentImage').style = "display:show";
     }
 </script>
+
+
+
