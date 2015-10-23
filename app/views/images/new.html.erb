@@ -10,7 +10,7 @@
   <%= img.file_field :image, required: true, accept: 'image/png,image/jpeg', hint: 'In order to analyse the exif data and change them please submit the corresponding image', class: "btn btn-primary", id:"dialog", style:"display:none" %>
 
  <%= button_tag(type: 'submit', class: "btn-large btn-success", style:"display:none", id:"createPicture") do %>
-    <i class="icon-plus icon-white"></i> Create picture
+    <i class="icon-plus-sign icon-white"></i> Create picture
   <% end %>
 
 <% end %>
@@ -36,11 +36,11 @@
 
 	$("#dialog").change(function(){
 		readURL(this);
+       	 	document.getElementById('createPicture').style = "display:show";
+        	document.getElementById('currentImage').style = "display:show";
 	});
     function openDialog(){
         document.getElementById('dialog').click();
-        document.getElementById('createPicture').style = "display:show";
-        document.getElementById('currentImage').style = "display:show";
     }
 </script>
 

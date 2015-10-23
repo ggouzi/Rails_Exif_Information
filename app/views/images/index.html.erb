@@ -18,8 +18,8 @@
 			<h5>Title </h5><%= (img.image.name) %><br><br>
 			<h5>Size </h5><%= (img.image.size/1024).round(2 )%> Ko<br>
 		</aside>
-
-
-
 	</div>
 <% end %>
+
+<button class="btn btn-large btn-primary" onclick="openDialog();">
+     <i class="icon-download-alt icon-white"></i> Download metadatas into CSV file</button>
